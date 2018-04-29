@@ -1,7 +1,44 @@
 # C Refresh
 Code for data-structures and algorithms developed while working on refreshing my C skills. I'm writing about the process at https://luckyfishlab.com. 
 
-Code samples include tests using the Unity test framework - http://www.throwtheswitch.org/tools. Unity Project is Copyright (c) 2007-14 Mike Karlesky, Mark VanderVoord, Greg Williams.
+Unity test framework and Ceedling build environment are from: http://www.throwtheswitch.org/tools. 
 
 # Data Structures
 Singly linked list
+
+# Pre-reqs
+You'll need Ruby and the 'ceedling' gem. I'm running Ruby 2.5.1. 
+
+Install ceedling:
+```
+gem install ceedling
+```
+
+# Run the tests
+```
+ceedling test:all
+```
+Output should be somthing like:
+```
+ceedling test:all
+
+
+Test 'test_linked-list.c'
+-------------------------
+Generating runner for test_linked-list.c...
+Compiling test_linked-list_runner.c...
+Compiling test_linked-list.c...
+Compiling unity.c...
+Compiling linked-list.c...
+Compiling cmock.c...
+Linking test_linked-list.out...
+Running test_linked-list.out...
+
+--------------------
+OVERALL TEST SUMMARY
+--------------------
+TESTED:  5
+PASSED:  5
+FAILED:  0
+IGNORED: 0
+```

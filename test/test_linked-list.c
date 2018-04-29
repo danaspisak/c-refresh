@@ -147,14 +147,3 @@ void test_function_should_return_length(void)
     val = lengthR(myList);
     TEST_ASSERT_EQUAL(3,val);
 }
-
-int main(void) {
-    UNITY_BEGIN();
-    RUN_TEST(test_function_should_access_as_index);
-    RUN_TEST(test_function_should_insert_after);
-    RUN_TEST(test_function_should_delete_beginning);
-    RUN_TEST(test_function_should_delete_after);
-    RUN_TEST(test_function_should_return_length);
-    return UNITY_END();
-}
-
