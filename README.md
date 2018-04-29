@@ -44,3 +44,6 @@ PASSED:  5
 FAILED:  0
 IGNORED: 0
 ```
+
+# Use Eclipse
+I followed the page, http://www.throwtheswitch.org/eclipse/, to get my project in Eclipse. I haven't tried debugging, but it's enough integration to run the tests and see the results. 
