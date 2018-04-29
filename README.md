@@ -9,6 +9,8 @@ Singly linked list
 # Pre-reqs
 You'll need Ruby and the 'ceedling' gem. I'm running Ruby 2.5.1. 
 
+I did need to install 'gcovr' to get ceedling to build. There are probably other reqs for things like gcc, but I'm assuming you've built C code in your environment before. 
+
 Install ceedling:
 ```
 gem install ceedling
