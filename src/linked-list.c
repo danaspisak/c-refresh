@@ -159,3 +159,115 @@ int lengthR(llnode *node)
 
 	return 1 + lengthR(node->next);
 }
+
+llnode *find(llnode *node, int value)
+{
+	llnode *foundNode = NULL;
+
+	while(node != NULL)
+	{
+		if (node->value == value)
+		{
+			foundNode = node;
+			break;
+		}
+		node = node->next;
+
+	}
+
+	return foundNode;
+}
+
+llnode *findR(llnode *node, int value)
+{
+
+	if(node == NULL)
+		return 0;
+
+	if (node->value == value)
+		return node;
+
+	return findR(node->next, value);
+}
+
+STATUS findIndex(llnode *node, int value, int *index)
+{
+	STATUS status = LL_ERROR;
+	int currIndex = 0;
+
+	if (index != NULL)
+	{
+		while(node != NULL)
+		{
+			if(node->value == value)
+			{
+				*index = currIndex;
+				status = LL_SUCCESS;
+			}
+			node = node->next;
+			currIndex++;
+		}
+	}
+
+	return status;
+}
+
+// TODO: This fails when a value is at the head of the list
+STATUS swap(llnode *node, int valueX, int valueY)
+{
+	llnode *nodeX, *nodeY, *preNodeX, *preNodeY, *tmpNode;
+	STATUS return_status = LL_ERROR;
+	STATUS local_status = LL_ERROR;
+	int xPos, yPos, preXPos, preYPos;
+
+	if (node != NULL && valueX != valueY)
+	{
+		/* Find the positions of the values and index before them */
+		local_status = findIndex(node, valueX, &xPos);
+		if (local_status == LL_SUCCESS)
+		{
+			if (xPos > 0)
+			{
+				preXPos = xPos--;
+			}
+			else
+			{
+				local_status = LL_ERROR;
+			}
+		}
+
+		if (local_status == LL_SUCCESS)
+		{
+			local_status = findIndex(node,valueY, &yPos);
+			if (local_status == LL_SUCCESS)
+			{
+				if (yPos > 0)
+				{
+					preYPos = yPos--;
+				}
+				else
+				{
+					local_status = LL_ERROR;
+				}
+			}
+		}
+
+		if (local_status == LL_SUCCESS)
+		{
+			/* Get the nodes for all the positions */
+			preNodeX = accessIndex(node, preXPos);
+			nodeX    = accessIndex(node, xPos);
+			preNodeY = accessIndex(node, preXPos);
+			nodeY    = accessIndex(node, yPos);
+
+			/* Move the pointers around */
+			preNodeX->next = nodeY;
+			preNodeY->next = nodeX;
+			tmpNode = nodeY->next;
+			nodeY->next = nodeX->next;
+			nodeX->next = tmpNode;
+		}
+	}
+
+	return return_status;
+}

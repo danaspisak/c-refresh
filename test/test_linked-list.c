@@ -146,4 +146,99 @@ void test_function_should_return_length(void)
 
     val = lengthR(myList);
     TEST_ASSERT_EQUAL(3,val);
+
+    while (deleteBeginning(&myList) == LL_SUCCESS);
+}
+
+void test_function_should_find(void)
+{
+	llnode *myList = NULL;
+	llnode *foundNode = NULL;
+	llnode *verifyNode = NULL;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 8);
+	insertBeginning(&myList, 7);
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 4);
+	insertBeginning(&myList, 9);
+	insertBeginning(&myList, 1);
+
+	foundNode = find(myList, 4);
+    TEST_ASSERT_NOT_EQUAL(NULL,foundNode);
+    TEST_ASSERT_EQUAL(foundNode->value, 4);
+
+	foundNode = find(myList, 8);
+    TEST_ASSERT_NOT_EQUAL(NULL,foundNode);
+    TEST_ASSERT_EQUAL(foundNode->value, 8);
+
+	foundNode = find(myList, -1);
+    TEST_ASSERT_EQUAL(NULL,foundNode);
+
+    verifyNode = accessIndex(myList,6);
+    TEST_ASSERT_EQUAL(verifyNode->value, 3);
+    foundNode = find(myList,3);
+    TEST_ASSERT_NOT_EQUAL(verifyNode, foundNode);
+    TEST_ASSERT_NOT_EQUAL(foundNode->next, NULL);
+    foundNode = find(foundNode->next,3);
+    TEST_ASSERT_EQUAL(verifyNode, foundNode);
+
+    /* Use recursive function this time */
+	foundNode = findR(myList, 4);
+    TEST_ASSERT_NOT_EQUAL(NULL,foundNode);
+    TEST_ASSERT_EQUAL(foundNode->value, 4);
+
+	foundNode = findR(myList, 8);
+    TEST_ASSERT_NOT_EQUAL(NULL,foundNode);
+    TEST_ASSERT_EQUAL(foundNode->value, 8);
+
+	foundNode = findR(myList, -1);
+    TEST_ASSERT_EQUAL(NULL,foundNode);
+
+    verifyNode = accessIndex(myList,6);
+    TEST_ASSERT_EQUAL(verifyNode->value, 3);
+    foundNode = findR(myList,3);
+    TEST_ASSERT_NOT_EQUAL(verifyNode, foundNode);
+    TEST_ASSERT_NOT_EQUAL(foundNode->next, NULL);
+    foundNode = findR(foundNode->next,3);
+    TEST_ASSERT_EQUAL(verifyNode, foundNode);
+
+    while (deleteBeginning(&myList) == LL_SUCCESS);
+}
+
+void test_function_should_swap(void)
+{
+	llnode *myList = NULL;
+	llnode *foundNode = NULL;
+	llnode *verifyNode = NULL;
+	STATUS status;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 8);
+	insertBeginning(&myList, 7);
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 4);
+	insertBeginning(&myList, 9);
+	insertBeginning(&myList, 1);
+
+	status = swap(myList, 1, 9);
+	TEST_ASSERT_EQUAL(status, LL_SUCCESS);
+	foundNode = accessIndex(myList, 0);
+	TEST_ASSERT_EQUAL(9, foundNode->value);
+	foundNode = accessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+
+	/* Try some failures when values are not found */
+	status = swap(myList, 0, 0);
+	TEST_ASSERT_EQUAL(status, LL_ERROR);
+
+	status = swap(myList, 0, 3);
+	TEST_ASSERT_EQUAL(status, LL_ERROR);
+
+	status = swap(myList, 3, 0);
+	TEST_ASSERT_EQUAL(status, LL_ERROR);
+
+    while (deleteBeginning(&myList) == LL_SUCCESS);
 }

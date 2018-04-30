@@ -20,7 +20,9 @@ STATUS insertAfter(int, llnode *);
 llnode *accessIndex(llnode *,int);
 STATUS deleteAfter(llnode *);
 STATUS deleteBeginning(llnode **);
-
+llnode *find(llnode*,int);
+llnode *findR(llnode *,int);
+STATUS swap(llnode *, int, int);
 
 
 void printList();
