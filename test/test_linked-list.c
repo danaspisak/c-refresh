@@ -223,7 +223,7 @@ void test_function_should_swap(void)
 	insertBeginning(&myList, 9);
 	insertBeginning(&myList, 1);
 
-	status = swap(myList, 1, 9);
+	status = swap(&myList, 1, 9);
 	TEST_ASSERT_EQUAL(status, LL_SUCCESS);
 	foundNode = accessIndex(myList, 0);
 	TEST_ASSERT_EQUAL(9, foundNode->value);
@@ -231,13 +231,13 @@ void test_function_should_swap(void)
 	TEST_ASSERT_EQUAL(1, foundNode->value);
 
 	/* Try some failures when values are not found */
-	status = swap(myList, 0, 0);
+	status = swap(&myList, 0, 0);
 	TEST_ASSERT_EQUAL(status, LL_ERROR);
 
-	status = swap(myList, 0, 3);
+	status = swap(&myList, 0, 3);
 	TEST_ASSERT_EQUAL(status, LL_ERROR);
 
-	status = swap(myList, 3, 0);
+	status = swap(&myList, 3, 0);
 	TEST_ASSERT_EQUAL(status, LL_ERROR);
 
     while (deleteBeginning(&myList) == LL_SUCCESS);

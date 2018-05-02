@@ -22,7 +22,7 @@ STATUS deleteAfter(llnode *);
 STATUS deleteBeginning(llnode **);
 llnode *find(llnode*,int);
 llnode *findR(llnode *,int);
-STATUS swap(llnode *, int, int);
+STATUS swap(llnode **, int, int);
 
 
 void printList();
