@@ -212,17 +212,13 @@ STATUS findIndex(llnode *node, int value, int *index)
 	return status;
 }
 
-// TODO: This fails when a value is at the head of the list
+
 STATUS swap(llnode **node, int valueX, int valueY)
 {
 	llnode *nodeX, *nodeY, *preNodeX, *preNodeY, *tmpNode;
 	STATUS return_status = LL_ERROR;
 
-	if (valueX == valueY)
-	{
-		return_status = LL_SUCCESS;
-	}
-	else if (*node != NULL )
+	if (*node != NULL )
 	{
 		preNodeX = NULL;
 		nodeX = *node;
@@ -243,23 +239,25 @@ STATUS swap(llnode **node, int valueX, int valueY)
 		/* Check we found both values */
 		if ((nodeX != NULL ) && (nodeY != NULL))
 		{
-			// If x is not head of linked list
-			if (preNodeX != NULL)
-			   preNodeX->next = nodeY;
-			else // Else make y as new head
-			   *node = nodeY;
+			if (nodeX != nodeY)
+			{
+				// If x is not head of linked list
+				if (preNodeX != NULL)
+				   preNodeX->next = nodeY;
+				else // Else make y as new head
+				   *node = nodeY;
 
-			// If y is not head of linked list
-			if (preNodeY != NULL)
-			   preNodeY->next = nodeX;
-			else  // Else make x as new head
-			   *node = nodeX;
+				// If y is not head of linked list
+				if (preNodeY != NULL)
+				   preNodeY->next = nodeX;
+				else  // Else make x as new head
+				   *node = nodeX;
 
-			// Swap next pointers
-			tmpNode = nodeY->next;
-			nodeY->next = nodeX->next;
-			nodeX->next  = tmpNode;
-
+				// Swap next pointers
+				tmpNode = nodeY->next;
+				nodeY->next = nodeX->next;
+				nodeX->next  = tmpNode;
+			}
 			return_status = LL_SUCCESS;
 		}
 	}
