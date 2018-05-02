@@ -24,6 +24,8 @@ llnode *find(llnode*,int);
 llnode *findR(llnode *,int);
 STATUS swap(llnode **, int, int);
 
+llnode *reverse(llnode **head, llnode **node);
+
 
 void printList();
 int length(llnode *);

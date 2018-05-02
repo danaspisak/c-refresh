@@ -264,3 +264,23 @@ STATUS swap(llnode **node, int valueX, int valueY)
 
 	return return_status;
 }
+
+
+
+llnode *reverse(llnode **head, llnode **node)
+{
+	llnode *tmpNode;
+
+	if (*node == NULL)
+		*node = *head;
+	if((*node)->next != NULL)
+	{
+		tmpNode = reverse(head, &(*node)->next);
+		tmpNode->next = *node;
+		(*node)->next = NULL;
+	}
+	else
+		*head = *node;
+
+	return *node;
+}

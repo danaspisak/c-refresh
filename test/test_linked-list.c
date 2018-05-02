@@ -242,3 +242,30 @@ void test_function_should_swap(void)
 
     while (deleteBeginning(&myList) == LL_SUCCESS);
 }
+
+void test_function_should_reverse(void)
+{
+	llnode *myList = NULL;
+	llnode *tNode = NULL;
+	STATUS status;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 8);
+	insertBeginning(&myList, 7);
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 4);
+	insertBeginning(&myList, 9);
+	insertBeginning(&myList, 1);
+
+	reverse(&myList, &tNode);
+
+	TEST_ASSERT_EQUAL(3,accessIndex(myList,0)->value);
+	TEST_ASSERT_EQUAL(8,accessIndex(myList,1)->value);
+	TEST_ASSERT_EQUAL(7,accessIndex(myList,2)->value);
+	TEST_ASSERT_EQUAL(3,accessIndex(myList,3)->value);
+	TEST_ASSERT_EQUAL(4,accessIndex(myList,4)->value);
+	TEST_ASSERT_EQUAL(9,accessIndex(myList,5)->value);
+	TEST_ASSERT_EQUAL(1,accessIndex(myList,6)->value);
+}
+
