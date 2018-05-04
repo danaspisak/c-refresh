@@ -297,3 +297,20 @@ void test_function_should_return_middle(void)
 
 	while (deleteBeginning(&myList) == LL_SUCCESS);
 }
+
+void test_function_should_delete_list(void)
+{
+	llnode *myList = NULL;
+	int length = 0;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 8);
+
+	length = lengthR(myList);
+	TEST_ASSERT_EQUAL(2,length);
+
+	deleteList(&myList);
+	length = lengthR(myList);
+	TEST_ASSERT_EQUAL(0,length);
+}

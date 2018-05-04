@@ -135,6 +135,12 @@ STATUS deleteBeginning(llnode **listHead)
 	return status;
 }
 
+void deleteList(llnode **head)
+{
+	while (deleteBeginning(head) == LL_SUCCESS);
+}
+
+
 int length(llnode *listHead)
 {
 	int i = 0;
