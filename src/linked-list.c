@@ -284,3 +284,8 @@ llnode *reverse(llnode **head, llnode **node)
 
 	return *node;
 }
+
+llnode *middle(llnode *head)
+{
+	return accessIndex(head, length(head)/2);
+}

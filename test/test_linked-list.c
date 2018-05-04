@@ -267,5 +267,33 @@ void test_function_should_reverse(void)
 	TEST_ASSERT_EQUAL(4,accessIndex(myList,4)->value);
 	TEST_ASSERT_EQUAL(9,accessIndex(myList,5)->value);
 	TEST_ASSERT_EQUAL(1,accessIndex(myList,6)->value);
+
+	while (deleteBeginning(&myList) == LL_SUCCESS);
 }
 
+void test_function_should_return_middle(void)
+{
+	llnode *myList = NULL;
+	llnode *tNode = NULL;
+	STATUS status;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+
+	tNode = middle(myList);
+	TEST_ASSERT_EQUAL(3, tNode->value);
+
+	insertBeginning(&myList, 8);
+	tNode = middle(myList);
+	TEST_ASSERT_EQUAL(3, tNode->value);
+
+	insertBeginning(&myList, 7);
+	tNode = middle(myList);
+	TEST_ASSERT_EQUAL(8, tNode->value);
+
+	insertBeginning(&myList, 3);
+	tNode = middle(myList);
+	TEST_ASSERT_EQUAL(8, tNode->value);
+
+	while (deleteBeginning(&myList) == LL_SUCCESS);
+}
