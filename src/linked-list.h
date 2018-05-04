@@ -33,5 +33,7 @@ void printList();
 int length(llnode *);
 int lengthR(llnode *);
 
+void merge(llnode *, llnode **);
+
 
 #endif

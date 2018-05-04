@@ -314,3 +314,65 @@ void test_function_should_delete_list(void)
 	length = lengthR(myList);
 	TEST_ASSERT_EQUAL(0,length);
 }
+void test_function_should_merge_alternating(void)
+{
+	llnode *list1, *list2;
+
+	list1 = NULL;
+	list2 = NULL;
+
+	/* Setup a linked-list */
+	insertBeginning(&list1, 3);
+	insertBeginning(&list1, 7);
+	insertBeginning(&list1, 8);
+
+	/* Setup a linked-list */
+	insertBeginning(&list2, 1);
+	insertBeginning(&list2, 5);
+	insertBeginning(&list2, 9);
+
+	merge(list1, &list2);
+	TEST_ASSERT_EQUAL(6, lengthR(list1));
+	TEST_ASSERT_EQUAL(0, lengthR(list2));
+	deleteList(&list1);
+
+	list1 = NULL;
+	list2 = NULL;
+
+	/* Setup a linked-list */
+	insertBeginning(&list1, 3);
+	insertBeginning(&list1, 7);
+	insertBeginning(&list1, 8);
+
+	/* Setup a linked-list */
+	insertBeginning(&list2, 1);
+	insertBeginning(&list2, 5);
+	insertBeginning(&list2, 9);
+	insertBeginning(&list2, 11);
+
+	merge(list1, &list2);
+	TEST_ASSERT_EQUAL(6, lengthR(list1));
+	TEST_ASSERT_EQUAL(1, lengthR(list2));
+	deleteList(&list1);
+	deleteList(&list2);
+
+	list1 = NULL;
+	list2 = NULL;
+
+	/* Setup a linked-list */
+	insertBeginning(&list1, 3);
+	insertBeginning(&list1, 7);
+	insertBeginning(&list1, 8);
+	insertBeginning(&list1, 10);
+
+	/* Setup a linked-list */
+	insertBeginning(&list2, 1);
+	insertBeginning(&list2, 5);
+
+	merge(list1, &list2);
+	TEST_ASSERT_EQUAL(6, lengthR(list1));
+	TEST_ASSERT_EQUAL(0, lengthR(list2));
+	deleteList(&list1);
+	deleteList(&list2);
+
+}

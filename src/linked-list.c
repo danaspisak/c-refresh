@@ -295,3 +295,32 @@ llnode *middle(llnode *head)
 {
 	return accessIndex(head, length(head)/2);
 }
+
+/*!
+ * \brief Alternating merge by adding nodes of head2 between nodes of head1, does
+ * not run longer than head1.
+ * https://www.geeksforgeeks.org/merge-a-linked-list-into-another-linked-list-at-alternate-positions/
+ */
+void merge(llnode *head1, llnode **head2)
+{
+	llnode *curList1, *curList2;
+	llnode *tnode, *tnode2;
+
+	if((*head2 != NULL) && (head1 != NULL))
+	{
+		curList1 = head1;
+		curList2 = *head2;
+
+		while(curList1 != NULL && curList2 != NULL)
+		{
+			tnode = curList1->next;
+			curList1->next = curList2;
+			curList1 = tnode;
+
+			tnode2 = curList2->next;
+			curList2->next = tnode;
+			curList2 = tnode2;
+			*head2 = tnode2;
+		}
+	}
+}
