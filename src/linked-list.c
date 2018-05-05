@@ -324,3 +324,71 @@ void merge(llnode *head1, llnode **head2)
 		}
 	}
 }
+
+llnode *mergeSort(llnode **list)
+{
+	llnode *a, *b, *c, *d;
+	llnode *currNode, *newList;
+	int l = length(*list);
+
+	/* Only continue to divide if we have more than a node */
+	if (l > 1)
+	{
+		a = accessIndex(*list,(l /2) -1);
+
+		/* Divide the list [0..a][b..end] */
+		b = a->next;       // b is the first node of the second list
+		a->next = NULL;    // terminate the first list
+
+		/* Continue to divide the lists */
+		c = mergeSort(list);
+		d = mergeSort(&b);
+
+		/* Merge sorted lists */
+		newList = NULL;
+		while ((c != NULL) && (d != NULL))
+		{
+			if (c->value > d->value)
+			{
+				/* If it's the first time, set the initial head */
+				if (newList == NULL)
+				{
+					newList = d;
+				}
+				else
+				{
+					currNode->next = d;
+				}
+				currNode = d;
+				d = d->next;
+			}
+			else
+			{
+				/* If it's the first time, set the initial head */
+				if (newList == NULL)
+				{
+					newList = c;
+				}
+				else
+				{
+					currNode->next = c;
+				}
+
+				currNode = c;
+				c = c->next;
+			}
+		}
+
+		/* Link in the remaining nodes from the non-empty list */
+		if (c == NULL)
+			currNode->next = d;
+		else
+			currNode->next = c;
+
+	}
+	else
+		newList = *list;
+
+	return newList;
+}
+

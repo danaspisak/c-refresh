@@ -376,3 +376,39 @@ void test_function_should_merge_alternating(void)
 	deleteList(&list2);
 
 }
+
+void test_function_should_mergeSorted(void)
+{
+	llnode *myList = NULL;
+	llnode *tNode = NULL;
+	STATUS status;
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 7);
+
+	myList = mergeSort(&myList);
+	TEST_ASSERT_EQUAL(3,accessIndex(myList,0)->value);
+	TEST_ASSERT_EQUAL(7,accessIndex(myList,1)->value);
+	deleteList(&myList);
+
+	/* Setup a linked-list */
+	insertBeginning(&myList, 2);
+	insertBeginning(&myList, 6);
+	insertBeginning(&myList, 11);
+	insertBeginning(&myList, 9);
+	insertBeginning(&myList, 12);
+	insertBeginning(&myList, 3);
+	insertBeginning(&myList, 7);
+	insertBeginning(&myList, 14);
+
+	myList = mergeSort(&myList);
+	TEST_ASSERT_EQUAL(2,accessIndex(myList,0)->value);
+	TEST_ASSERT_EQUAL(3,accessIndex(myList,1)->value);
+	TEST_ASSERT_EQUAL(6,accessIndex(myList,2)->value);
+	TEST_ASSERT_EQUAL(11,accessIndex(myList,5)->value);
+	TEST_ASSERT_EQUAL(12,accessIndex(myList,6)->value);
+	TEST_ASSERT_EQUAL(14,accessIndex(myList,7)->value);
+
+	deleteList(&myList);
+}
