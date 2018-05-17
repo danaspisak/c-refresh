@@ -16,6 +16,9 @@ typedef struct DLLNode
 STATUS dlCreateNode(dllnode **);
 void dlDestroyNode(dllnode *);
 STATUS dlInsertBeginning(dllnode **,int);
+STATUS dlInsertAfter(int, dllnode *);
 dllnode *dlAccessIndex(dllnode *, int);
+STATUS dlDeleteBeginning(dllnode **);
+void dlDeleteList(dllnode **);
 
 #endif

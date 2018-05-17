@@ -5,6 +5,7 @@ Unity test framework and Ceedling build environment are from: http://www.throwth
 
 # Data Structures
 Singly linked list
+Doubly linked list
 
 # Pre-reqs
 You'll need Ruby and the 'ceedling' gem. I'm running Ruby 2.5.1. 

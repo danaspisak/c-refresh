@@ -55,6 +55,29 @@ STATUS dlInsertBeginning(dllnode **head,int value)
 	return status;
 }
 
+STATUS dlInsertAfter(int value, dllnode *afterThis)
+{
+	STATUS status = CF_ERROR;
+	dllnode *newNode;
+
+	if (afterThis)
+	{
+		status = dlCreateNode(&newNode);
+		if (status == CF_SUCCESS)
+		{
+			newNode->value = value;
+			newNode->next = afterThis->next;
+			newNode->prev = afterThis;
+			afterThis->next->prev = newNode;
+			afterThis->next = newNode;
+		}
+	}
+
+	return status;
+
+}
+
+
 dllnode *dlAccessIndex(dllnode *listHead, int index)
 {
 	dllnode *foundNode = NULL;
@@ -70,3 +93,33 @@ dllnode *dlAccessIndex(dllnode *listHead, int index)
 	}
 	return foundNode;
 }
+
+STATUS dlDeleteBeginning(dllnode **listHead)
+{
+	STATUS status = CF_ERROR;
+	dllnode *nextNode;
+
+	if (*listHead != NULL)
+	{
+		nextNode = (*listHead)->next;
+		if (nextNode != NULL)
+		{
+			nextNode->prev = NULL;
+		}
+		dlDestroyNode(*listHead);
+		*listHead = nextNode;
+		status = CF_SUCCESS;
+	}
+
+	return status;
+}
+
+void dlDeleteList(dllnode **head)
+{
+	while (dlDeleteBeginning(head) == CF_SUCCESS);
+}
+
+
+
+
+
