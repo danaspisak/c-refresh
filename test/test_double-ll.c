@@ -161,3 +161,32 @@ void test_function_should_delete_at_index(void)
     dlDeleteList(&listHead);
 }
 
+void test_function_should_return_list_size(void)
+{
+	STATUS status;
+    dllnode *testNode = NULL;
+    dllnode *listHead = NULL;
+    int val;
+
+
+    /* Empty list */
+    val = dlSize(listHead);
+    TEST_ASSERT_EQUAL(0,val);
+
+    /* Setup a linked-list */
+	dlInsertBeginning(&listHead, 8);
+    val = dlSize(listHead);
+    TEST_ASSERT_EQUAL(1,val);
+
+
+
+	dlInsertBeginning(&listHead, 7);
+	dlInsertBeginning(&listHead, 3);
+	dlInsertBeginning(&listHead, 2);
+    val = dlSize(listHead);
+    TEST_ASSERT_EQUAL(4,val);
+
+	dlDeleteList(&listHead);
+    val = dlSize(listHead);
+    TEST_ASSERT_EQUAL(0,val);
+}

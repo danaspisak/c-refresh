@@ -21,5 +21,6 @@ dllnode *dlAccessIndex(dllnode *, int);
 STATUS dlDeleteBeginning(dllnode **);
 void dlDeleteList(dllnode **);
 STATUS dlDeleteIndex(dllnode **listHead,int index);
+int dlSize(dllnode *);
 
 #endif

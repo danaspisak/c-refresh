@@ -151,5 +151,18 @@ STATUS dlDeleteIndex(dllnode **listHead,int index)
 }
 
 
+int dlSize(dllnode *listHead)
+{
+	int size = 0;
+	dllnode *tmpNode = listHead;
+
+	while(tmpNode != NULL)
+	{
+		size++;
+		tmpNode = tmpNode->next;
+	}
+
+	return size;
+}
 
 
