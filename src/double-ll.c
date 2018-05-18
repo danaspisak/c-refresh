@@ -119,6 +119,36 @@ void dlDeleteList(dllnode **head)
 	while (dlDeleteBeginning(head) == CF_SUCCESS);
 }
 
+STATUS dlDeleteIndex(dllnode **listHead,int index)
+{
+	STATUS status = CF_ERROR;
+	dllnode *tmpNode, *prevNode,*nextNode;
+
+	if (index == 0)
+	{
+		status = dlDeleteBeginning(listHead);
+	}
+	else if (index > 0)
+	{
+		tmpNode = dlAccessIndex(*listHead,index);
+		if (tmpNode == NULL)
+		{
+			status = CF_ERROR;
+		}
+		else
+		{
+			tmpNode->prev->next = tmpNode->next;
+			if (tmpNode->next != NULL)
+			{
+				tmpNode->next->prev = tmpNode->prev;
+			}
+			dlDestroyNode(tmpNode);
+			status = CF_SUCCESS;
+		}
+	}
+
+	return status;
+}
 
 
 
