@@ -178,8 +178,6 @@ void test_function_should_return_list_size(void)
     val = dlSize(listHead);
     TEST_ASSERT_EQUAL(1,val);
 
-
-
 	dlInsertBeginning(&listHead, 7);
 	dlInsertBeginning(&listHead, 3);
 	dlInsertBeginning(&listHead, 2);
@@ -189,4 +187,34 @@ void test_function_should_return_list_size(void)
 	dlDeleteList(&listHead);
     val = dlSize(listHead);
     TEST_ASSERT_EQUAL(0,val);
+}
+
+void test_function_should_return_middle(void)
+{
+	STATUS status;
+    dllnode *testNode = NULL;
+    dllnode *listHead = NULL;
+    int val;
+
+    /* Empty list */
+	testNode = dlMiddle(listHead);
+	TEST_ASSERT_EQUAL(NULL,testNode);
+
+
+    /* 1 item */
+	dlInsertBeginning(&listHead, 8);
+	testNode = dlMiddle(listHead);
+	TEST_ASSERT_EQUAL(8,testNode->value);
+
+	/* 2 items */
+	dlInsertBeginning(&listHead, 7);
+	testNode = dlMiddle(listHead);
+	TEST_ASSERT_EQUAL(8,testNode->value);
+
+	/* 3 items */
+	dlInsertBeginning(&listHead, 3);
+	testNode = dlMiddle(listHead);
+	TEST_ASSERT_EQUAL(7,testNode->value);
+
+	dlDeleteList(&listHead);
 }

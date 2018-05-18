@@ -22,5 +22,6 @@ STATUS dlDeleteBeginning(dllnode **);
 void dlDeleteList(dllnode **);
 STATUS dlDeleteIndex(dllnode **listHead,int index);
 int dlSize(dllnode *);
+dllnode *dlMiddle(dllnode *);
 
 #endif

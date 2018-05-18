@@ -165,4 +165,8 @@ int dlSize(dllnode *listHead)
 	return size;
 }
 
+dllnode *dlMiddle(dllnode *head)
+{
+	return dlAccessIndex(head, dlSize(head)/2);
+}
 
