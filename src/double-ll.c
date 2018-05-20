@@ -178,13 +178,26 @@ STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
 
 	if ((*listHead != NULL) && (nodeX != NULL) && (nodeY != NULL) && (nodeX != nodeY))
 	{
-		nodeX->prev->next = nodeY;
-		nodeY->prev->next = nodeX;
+		if (nodeX->prev != NULL)
+			nodeX->prev->next = nodeY;
+		else
+			*listHead = nodeY;
 
+		if (nodeY->prev != NULL)
+			nodeY->prev->next = nodeX;
+		else
+			*listHead = nodeX;
+
+		/* what if nodeX->next is nodeY */
 		tmpNode = nodeX->next;
+
 		nodeX->next = nodeY->next;
-		nodeY->next = tmpNode;
-		tmpNode->prev = nodeY;
+		if (nodeY->next != NULL)
+			nodeY->next->prev = nodeX;
+		if (nodeY->next != tmpNode)
+			nodeY->next = tmpNode;
+		if (tmpNode != NULL)
+			tmpNode->prev = nodeY;
 
 		tmpNode = nodeY->prev;
 		nodeY->prev = nodeX->prev;

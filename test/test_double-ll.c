@@ -250,6 +250,19 @@ void test_function_should_swap(void)
 	TEST_ASSERT_EQUAL(9, foundNode->value);
 
 	/* Nodes are next to eachother */
+	nodeX = dlAccessIndex(myList,1);
+	nodeY = dlAccessIndex(myList,2);
+	/* [1,3,4,9,7,8,0] */
+	/* Swapping 3, 4 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [1,4,3,9,7,8,0] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(4, foundNode->value);
+	foundNode = dlAccessIndex(myList, 2);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 3);
+	TEST_ASSERT_EQUAL(9, foundNode->value);
 
 	/* X is head */
 	/* Y is head */
