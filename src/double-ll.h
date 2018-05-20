@@ -23,5 +23,6 @@ void dlDeleteList(dllnode **);
 STATUS dlDeleteIndex(dllnode **listHead,int index);
 int dlSize(dllnode *);
 dllnode *dlMiddle(dllnode *);
+STATUS dlSwap(dllnode **, dllnode *, dllnode *);
 
 #endif

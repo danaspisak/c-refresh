@@ -218,3 +218,52 @@ void test_function_should_return_middle(void)
 
 	dlDeleteList(&listHead);
 }
+
+void test_function_should_swap(void)
+{
+	dllnode *myList = NULL;
+	dllnode *foundNode = NULL;
+	dllnode *verifyNode = NULL;
+	dllnode *nodeX, *nodeY;
+
+	STATUS status;
+
+	/* Setup a linked-list */
+	dlInsertBeginning(&myList, 0);
+	dlInsertBeginning(&myList, 8);
+	dlInsertBeginning(&myList, 7);
+	dlInsertBeginning(&myList, 3);
+	dlInsertBeginning(&myList, 4);
+	dlInsertBeginning(&myList, 9);
+	dlInsertBeginning(&myList, 1);
+    /* [1,9,4,3,7,8,0] */
+	/* X is not next to Y */
+	nodeX = dlAccessIndex(myList,1);
+	nodeY = dlAccessIndex(myList,3);
+	/* Swapping 9, 3 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [1,3,4,9,7,8,0] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 3);
+	TEST_ASSERT_EQUAL(9, foundNode->value);
+
+	/* Nodes are next to eachother */
+
+	/* X is head */
+	/* Y is head */
+
+
+	/* Try some failures when values are not found */
+	status = dlSwap(&myList, NULL, NULL);
+	TEST_ASSERT_EQUAL(CF_ERROR, status);
+
+	status = dlSwap(&myList, NULL, nodeY);
+	TEST_ASSERT_EQUAL(CF_ERROR, status);
+
+	status = dlSwap(&myList, nodeX, NULL);
+	TEST_ASSERT_EQUAL(CF_ERROR, status);
+
+	dlDeleteList(&myList);
+}

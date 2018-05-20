@@ -170,3 +170,30 @@ dllnode *dlMiddle(dllnode *head)
 	return dlAccessIndex(head, dlSize(head)/2);
 }
 
+STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
+{
+	dllnode *tmpNode;
+	STATUS return_status = CF_ERROR;
+
+
+	if ((*listHead != NULL) && (nodeX != NULL) && (nodeY != NULL) && (nodeX != nodeY))
+	{
+		nodeX->prev->next = nodeY;
+		nodeY->prev->next = nodeX;
+
+		tmpNode = nodeX->next;
+		nodeX->next = nodeY->next;
+		nodeY->next = tmpNode;
+		tmpNode->prev = nodeY;
+
+		tmpNode = nodeY->prev;
+		nodeY->prev = nodeX->prev;
+		nodeX->prev = tmpNode;
+
+		return_status = CF_SUCCESS;
+	}
+
+
+	return return_status;
+}
+
