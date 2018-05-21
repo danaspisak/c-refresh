@@ -178,32 +178,60 @@ STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
 
 	if ((*listHead != NULL) && (nodeX != NULL) && (nodeY != NULL) && (nodeX != nodeY))
 	{
-		if (nodeX->prev != NULL)
-			nodeX->prev->next = nodeY;
+
+		if ((nodeX->next != nodeY) && (nodeY->next != nodeX))
+		{
+			if (nodeX->prev != NULL)
+				nodeX->prev->next = nodeY;
+			else
+				*listHead = nodeY;
+
+			if (nodeY->prev != NULL)
+				nodeY->prev->next = nodeX;
+			else
+				*listHead = nodeX;
+
+			/* what if nodeX->next is nodeY */
+			tmpNode = nodeX->next;
+
+			nodeX->next = nodeY->next;
+			if (nodeY->next != NULL)
+				nodeY->next->prev = nodeX;
+			if (nodeY->next != tmpNode)
+				nodeY->next = tmpNode;
+			if (tmpNode != NULL)
+				tmpNode->prev = nodeY;
+
+			tmpNode = nodeY->prev;
+			nodeY->prev = nodeX->prev;
+			nodeX->prev = tmpNode;
+
+			return_status = CF_SUCCESS;
+		}
 		else
-			*listHead = nodeY;
+		{
+			/* Swap pointer to X and Y */
+			if (nodeY->next == nodeX)
+			{
+				tmpNode = nodeX;
+				nodeX = nodeY;
+				nodeY = tmpNode;
+			}
 
-		if (nodeY->prev != NULL)
-			nodeY->prev->next = nodeX;
-		else
-			*listHead = nodeX;
+			if (nodeX->prev != NULL)
+				nodeX->prev->next = nodeY;
+			else
+				*listHead = nodeY;
 
-		/* what if nodeX->next is nodeY */
-		tmpNode = nodeX->next;
+			nodeY->prev = nodeX->prev;
+			if (nodeY->next != NULL)
+				nodeY->next->prev = nodeX;
+			nodeX->next = nodeY->next;
+			nodeY->next = nodeX;
+			nodeX->prev = nodeY;
 
-		nodeX->next = nodeY->next;
-		if (nodeY->next != NULL)
-			nodeY->next->prev = nodeX;
-		if (nodeY->next != tmpNode)
-			nodeY->next = tmpNode;
-		if (tmpNode != NULL)
-			tmpNode->prev = nodeY;
-
-		tmpNode = nodeY->prev;
-		nodeY->prev = nodeX->prev;
-		nodeX->prev = tmpNode;
-
-		return_status = CF_SUCCESS;
+			return_status = CF_SUCCESS;
+		}
 	}
 
 

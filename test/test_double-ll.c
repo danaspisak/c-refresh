@@ -263,10 +263,183 @@ void test_function_should_swap(void)
 	TEST_ASSERT_EQUAL(3, foundNode->value);
 	foundNode = dlAccessIndex(myList, 3);
 	TEST_ASSERT_EQUAL(9, foundNode->value);
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,0);
+	foundNode = dlAccessIndex(myList,1);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	verifyNode = dlAccessIndex(myList,2);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+
+	foundNode = dlAccessIndex(myList,3);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+
+	/* Nodes are next to eachother, y is first */
+	nodeX = dlAccessIndex(myList,2);
+	nodeY = dlAccessIndex(myList,1);
+	/* [1,4,3,9,7,8,0] */
+	/* Swapping 3, 4 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [1,3,4,9,7,8,0] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 2);
+	TEST_ASSERT_EQUAL(4, foundNode->value);
+	foundNode = dlAccessIndex(myList, 3);
+	TEST_ASSERT_EQUAL(9, foundNode->value);
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,0);
+	foundNode = dlAccessIndex(myList,1);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	verifyNode = dlAccessIndex(myList,2);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+
+	foundNode = dlAccessIndex(myList,3);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
 
 	/* X is head */
-	/* Y is head */
+	nodeX = dlAccessIndex(myList,0);
+	nodeY = dlAccessIndex(myList,1);
+	/* [1,3,4,9,7,8,0] */
+	/* Swapping 1, 3 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [3,1,4,9,7,8,0] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 0);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+	foundNode = dlAccessIndex(myList, 2);
+	TEST_ASSERT_EQUAL(4, foundNode->value);
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,0);
+	foundNode = dlAccessIndex(myList,1);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
 
+	verifyNode = dlAccessIndex(myList,2);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+
+	foundNode = dlAccessIndex(myList,3);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+
+
+	/* Y is head */
+	nodeX = dlAccessIndex(myList,1);
+	nodeY = dlAccessIndex(myList,0);
+	/* [3,1,4,9,7,8,0] */
+	/* Swapping 3, 1 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [1,3,4,9,7,8,0] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 0);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 2);
+	TEST_ASSERT_EQUAL(4, foundNode->value);
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,0);
+	foundNode = dlAccessIndex(myList,1);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	verifyNode = dlAccessIndex(myList,2);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+
+	foundNode = dlAccessIndex(myList,3);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+    /* Swap first and last element */
+	nodeX = dlAccessIndex(myList,0);
+	nodeY = dlAccessIndex(myList,6);
+	/* [1,3,4,9,7,8,0] */
+	/* Swapping 1, 0 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [0,3,4,9,7,8,1] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 0);
+	TEST_ASSERT_EQUAL(0, foundNode->value);
+	foundNode = dlAccessIndex(myList, 1);
+	TEST_ASSERT_EQUAL(3, foundNode->value);
+	foundNode = dlAccessIndex(myList, 6);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,0);
+	foundNode = dlAccessIndex(myList,1);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	foundNode = dlAccessIndex(myList,5);
+	verifyNode = dlAccessIndex(myList,6);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+	TEST_ASSERT_EQUAL(NULL, verifyNode->next);
+
+	/* Swap next to last and last */
+	nodeX = dlAccessIndex(myList,5);
+	nodeY = dlAccessIndex(myList,6);
+	/* [0,3,4,9,7,8,1] */
+	/* Swapping 8, 1 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [0,3,4,9,7,1,8] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 5);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+	foundNode = dlAccessIndex(myList, 6);
+	TEST_ASSERT_EQUAL(8, foundNode->value);
+
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,4);
+	foundNode = dlAccessIndex(myList,5);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	foundNode = dlAccessIndex(myList,5);
+	verifyNode = dlAccessIndex(myList,6);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+	TEST_ASSERT_EQUAL(NULL, verifyNode->next);
+
+	/* Swap last and next to last */
+	nodeX = dlAccessIndex(myList,6);
+	nodeY = dlAccessIndex(myList,5);
+	/* [0,3,4,9,7,1,8] */
+	/* Swapping 1, 8 */
+	status = dlSwap(&myList, nodeX, nodeY);
+	/* [0,3,4,9,7,8,1] */
+	TEST_ASSERT_EQUAL(status, CF_SUCCESS);
+	foundNode = dlAccessIndex(myList, 5);
+	TEST_ASSERT_EQUAL(8, foundNode->value);
+	foundNode = dlAccessIndex(myList, 6);
+	TEST_ASSERT_EQUAL(1, foundNode->value);
+
+	/* Check prev,next pointers */
+	verifyNode = dlAccessIndex(myList,4);
+	foundNode = dlAccessIndex(myList,5);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->prev);
+	TEST_ASSERT_EQUAL(verifyNode->next, foundNode);
+
+	foundNode = dlAccessIndex(myList,5);
+	verifyNode = dlAccessIndex(myList,6);
+	TEST_ASSERT_EQUAL(verifyNode, foundNode->next);
+	TEST_ASSERT_EQUAL(verifyNode->prev, foundNode);
+	TEST_ASSERT_EQUAL(NULL, verifyNode->next);
 
 	/* Try some failures when values are not found */
 	status = dlSwap(&myList, NULL, NULL);
