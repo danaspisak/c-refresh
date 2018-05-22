@@ -210,6 +210,7 @@ STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
 		}
 		else
 		{
+			/* For adjacent nodes, make X before Y */
 			/* Swap pointer to X and Y */
 			if (nodeY->next == nodeX)
 			{
@@ -234,7 +235,24 @@ STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
 		}
 	}
 
-
 	return return_status;
 }
 
+void dlReverse(dllnode **listHead)
+{
+	dllnode *tmpNode;
+	dllnode *currNode;
+
+	currNode = *listHead;
+	tmpNode = currNode->next;
+
+	while(tmpNode != NULL)
+	{
+		currNode->next = currNode->prev;
+		currNode->prev = tmpNode;
+
+		currNode = tmpNode;
+		tmpNode = currNode->next;
+
+	}
+}

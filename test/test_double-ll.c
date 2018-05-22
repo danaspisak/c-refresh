@@ -453,3 +453,49 @@ void test_function_should_swap(void)
 
 	dlDeleteList(&myList);
 }
+
+void function_should_reverse_list(void)
+{
+	dllnode *myList = NULL;
+	dllnode *foundNode = NULL;
+	dllnode *verifyNode = NULL;
+
+	/* Setup a linked-list */
+	dlInsertBeginning(&myList, 4);
+	dlInsertBeginning(&myList, 3);
+	dlInsertBeginning(&myList, 2);
+	dlInsertBeginning(&myList, 1);
+
+	dlReverse(&myList);
+	foundNode = dlAccessIndex(myList,0);
+	TEST_ASSERT_EQUAL(4,foundNode->value);
+	TEST_ASSERT_EQUAL(NULL,foundNode->prev);
+	TEST_ASSERT_EQUAL(3,foundNode->next->value);
+	TEST_ASSERT_EQUAL(foundNode,foundNode->next->prev);
+	TEST_ASSERT_EQUAL(2,foundNode->next->next->value);
+	TEST_ASSERT_EQUAL(foundNode->next,foundNode->next->next->prev);
+	TEST_ASSERT_EQUAL(NULL,foundNode->next->next->next->next);
+
+	TEST_ASSERT_EQUAL(foundNode->next->next->next,foundNode->next->next->next->prev);
+
+	dlDeleteList(&myList);
+
+	/* Test null list */
+	myList = NULL;
+	dlReverse(&myList);
+	TEST_ASSERT_EQUAL(NULL, myList);
+
+	/* Test single item list */
+	dlInsertBeginning(&myList, 1);
+	dlReverse(&myList);
+	TEST_ASSERT_EQUAL(1, myList->value);
+
+	/* Test single item list */
+	dlInsertBeginning(&myList, 2);
+	dlReverse(&myList);
+	TEST_ASSERT_EQUAL(2, myList->value);
+	TEST_ASSERT_EQUAL(NULL, myList->prev);
+	TEST_ASSERT_EQUAL(1, myList->next->value);
+	TEST_ASSERT_EQUAL(NULL, myList->next->next);
+	TEST_ASSERT_EQUAL(2, myList->next->prev->value);
+}
