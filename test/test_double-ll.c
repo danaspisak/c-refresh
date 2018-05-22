@@ -498,4 +498,42 @@ void function_should_reverse_list(void)
 	TEST_ASSERT_EQUAL(1, myList->next->value);
 	TEST_ASSERT_EQUAL(NULL, myList->next->next);
 	TEST_ASSERT_EQUAL(2, myList->next->prev->value);
+
+	dlDeleteList(&myList);
+}
+
+void test_function_should_mergeSorted(void)
+{
+	dllnode *myList = NULL;
+	dllnode *tNode = NULL;
+	STATUS status;
+
+	/* Setup a linked-list */
+	dlInsertBeginning(&myList, 3);
+	dlInsertBeginning(&myList, 7);
+
+	myList = dlMergeSort(&myList);
+	TEST_ASSERT_EQUAL(3,dlAccessIndex(myList,0)->value);
+	TEST_ASSERT_EQUAL(7,dlAccessIndex(myList,1)->value);
+	dlDeleteList(&myList);
+
+	/* Setup a linked-list */
+	dlInsertBeginning(&myList, 2);
+	dlInsertBeginning(&myList, 6);
+	dlInsertBeginning(&myList, 11);
+	dlInsertBeginning(&myList, 9);
+	dlInsertBeginning(&myList, 12);
+	dlInsertBeginning(&myList, 3);
+	dlInsertBeginning(&myList, 7);
+	dlInsertBeginning(&myList, 14);
+
+	myList = dlMergeSort(&myList);
+	TEST_ASSERT_EQUAL(2,dlAccessIndex(myList,0)->value);
+	TEST_ASSERT_EQUAL(3,dlAccessIndex(myList,1)->value);
+	TEST_ASSERT_EQUAL(6,dlAccessIndex(myList,2)->value);
+	TEST_ASSERT_EQUAL(11,dlAccessIndex(myList,5)->value);
+	TEST_ASSERT_EQUAL(12,dlAccessIndex(myList,6)->value);
+	TEST_ASSERT_EQUAL(14,dlAccessIndex(myList,7)->value);
+
+	dlDeleteList(&myList);
 }

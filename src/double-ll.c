@@ -256,3 +256,84 @@ void dlReverse(dllnode **listHead)
 
 	}
 }
+
+
+dllnode *dlMergeSort(dllnode **list)
+{
+	dllnode *a, *b, *c, *d;
+	dllnode *currNode, *newList;
+	int l = dlSize(*list);
+
+	/* Only continue to divide if we have more than a node */
+	if (l > 1)
+	{
+		a = dlAccessIndex(*list,(l /2) -1);
+
+		/* Divide the list [0..a][b..end] */
+		b = a->next;       // b is the first node of the second list
+		a->next = NULL;    // terminate the first list
+		b->prev = NULL;
+
+		/* Continue to divide the lists */
+		c = dlMergeSort(list);
+		d = dlMergeSort(&b);
+
+		/* Merge sorted lists */
+		newList = NULL;
+		while ((c != NULL) && (d != NULL))
+		{
+			if (c->value > d->value)
+			{
+				/* If it's the first time, set the initial head */
+				if (newList == NULL)
+				{
+					newList = d;
+					d->prev = NULL;
+				}
+				else
+				{
+					currNode->next = d;
+					d->prev = NULL;
+				}
+				currNode = d;
+				d = d->next;
+			}
+			else
+			{
+				/* If it's the first time, set the initial head */
+				if (newList == NULL)
+				{
+					newList = c;
+					c->prev = NULL;
+				}
+				else
+				{
+					currNode->next = c;
+					c->prev = currNode;
+				}
+
+				currNode = c;
+				c = c->next;
+			}
+		}
+
+		/* Link in the remaining nodes from the non-empty list */
+		if (c == NULL)
+		{
+			currNode->next = d;
+			d->prev = currNode;
+		}
+		else
+		{
+			currNode->next = c;
+			c->prev = currNode;
+		}
+
+	}
+	else
+		newList = *list;
+
+	return newList;
+}
+
+
