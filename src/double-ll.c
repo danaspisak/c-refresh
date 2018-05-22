@@ -175,8 +175,7 @@ STATUS dlSwap(dllnode **listHead, dllnode *nodeX, dllnode *nodeY)
 	dllnode *tmpNode;
 	STATUS return_status = CF_ERROR;
 
-
-	if ((*listHead != NULL) && (nodeX != NULL) && (nodeY != NULL) && (nodeX != nodeY))
+    if ((*listHead != NULL) && (nodeX != NULL) && (nodeY != NULL) && (nodeX != nodeY))
 	{
 
 		if ((nodeX->next != nodeY) && (nodeY->next != nodeX))
@@ -336,4 +335,50 @@ dllnode *dlMergeSort(dllnode **list)
 	return newList;
 }
 
+/* This function takes last element as pivot, places
+   the pivot element at its correct position in sorted
+    array, and places all smaller (smaller than pivot)
+   to left of pivot and all greater elements to right
+   of pivot */
+int dlPartition (dllnode **list, int low, int high)
+{
+	dllnode *pivotNode;
+	dllnode *jNode;
+	int i,j;
 
+    // pivot (Element to be placed at right position)
+    pivotNode = dlAccessIndex(*list,high);
+
+    i = (low - 1);  // Index of smaller element
+
+    for (j = low; j <= high- 1; j++)
+    {
+        // If current element is smaller than or
+        // equal to pivot
+    	jNode = dlAccessIndex(*list,j);
+
+        if (jNode->value <= pivotNode->value)
+        {
+            i++;    // increment index of smaller element
+            dlSwap(list, dlAccessIndex(*list,i), dlAccessIndex(*list,j));
+        }
+    }
+    //swap arr[i + 1] and arr[high])
+    dlSwap(list, dlAccessIndex(*list, i+1), dlAccessIndex(*list,high));
+    return (i + 1);
+}
+
+void dlQuickSort(dllnode **node,int low, int high)
+{
+	int pi;
+
+	if (low < high)
+	{
+		/* pi is partitioning index, arr[pi] is now
+		   at right place */
+		pi = dlPartition(node, low, high);
+
+		dlQuickSort(node, low, pi - 1);  // Before pi
+		dlQuickSort(node, pi + 1, high); // After pi
+	}
+}

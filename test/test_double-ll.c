@@ -537,3 +537,32 @@ void test_function_should_mergeSorted(void)
 
 	dlDeleteList(&myList);
 }
+
+void test_function_should_quicksort(void)
+{
+	dllnode *myList = NULL;
+	dllnode *tNode = NULL;
+	int sorted[] = {2,3,6,7,9,11,12,14};
+	int i;
+
+	/* Setup a linked-list */
+	dlInsertBeginning(&myList, 2);
+	dlInsertBeginning(&myList, 6);
+	dlInsertBeginning(&myList, 11);
+	dlInsertBeginning(&myList, 9);
+	dlInsertBeginning(&myList, 12);
+	dlInsertBeginning(&myList, 3);
+	dlInsertBeginning(&myList, 7);
+	dlInsertBeginning(&myList, 14);
+
+	dlQuickSort(&myList,0,dlSize(myList)-1);
+	tNode = myList;
+	i = 0;
+	while(tNode != NULL)
+	{
+		TEST_ASSERT_EQUAL(sorted[i],tNode->value);
+		i++;
+		tNode = tNode->next;
+	}
+
+}

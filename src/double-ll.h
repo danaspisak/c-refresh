@@ -26,4 +26,5 @@ dllnode *dlMiddle(dllnode *);
 STATUS dlSwap(dllnode **, dllnode *, dllnode *);
 void dlReverse(dllnode **);
 dllnode *dlMergeSort(dllnode **);
+void dlQuickSort(dllnode **node,int, int);
 #endif
