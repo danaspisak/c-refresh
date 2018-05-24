@@ -68,7 +68,8 @@ STATUS dlInsertAfter(int value, dllnode *afterThis)
 			newNode->value = value;
 			newNode->next = afterThis->next;
 			newNode->prev = afterThis;
-			afterThis->next->prev = newNode;
+			if (afterThis->next != NULL)
+				afterThis->next->prev = newNode;
 			afterThis->next = newNode;
 		}
 	}
