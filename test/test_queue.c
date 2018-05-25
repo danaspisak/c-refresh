@@ -103,3 +103,30 @@ void test_function_should_dequeue(void)
 
 
 }
+void test_function_should_return_front_rear(void)
+{
+	STATUS status;
+	int value;
+	queue myQueue;
+	queue *qp = &myQueue;
+
+	myQueue.head = NULL;
+	myQueue.tail = NULL;
+
+	status = enqueue(&qp, 2);
+	front(qp, &value);
+	TEST_ASSERT_EQUAL(2,value);
+
+	value = 0;
+	rear(qp, &value);
+	TEST_ASSERT_EQUAL(2,value);
+
+	status = enqueue(&qp, 3);
+	front(qp, &value);
+	TEST_ASSERT_EQUAL(2,value);
+	value = 0;
+	rear(qp, &value);
+	TEST_ASSERT_EQUAL(3,value);
+
+	dlDeleteList(&(myQueue.head));
+}

@@ -51,7 +51,19 @@ STATUS dequeue(queue **q, int *value)
 	return status;
 }
 
-/*
-void rear(queue *q,int*);
-void front(queue *q, int*);
-*/
+
+void rear(queue *q,int *value)
+{
+	if ((q != NULL) && (q->tail != NULL))
+	{
+		*value = q->tail->value;
+	}
+}
+
+void front(queue *q, int *value)
+{
+	if ((q != NULL) && (q->head != NULL))
+	{
+		*value = q->head->value;
+	}
+}
