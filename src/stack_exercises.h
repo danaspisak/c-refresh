@@ -5,5 +5,6 @@
 
 STATUS checkBalanced(char *);
 void reverseStack(llnode **head);
-
+void enqueueStack(llnode **head, int value);
+void dequeueStack(llnode **head, int *value);
 #endif

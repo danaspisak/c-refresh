@@ -33,7 +33,7 @@ void test_function_should_check_balance (void)
 
 void test_function_should_reverse_stack(void)
 {
-	llnode *stack;
+	llnode *stack = NULL;
 	int value;
 
 	push(&stack, 1);
@@ -49,5 +49,25 @@ void test_function_should_reverse_stack(void)
 	pop(&stack, &value);
 	TEST_ASSERT_EQUAL(3, value);
 	pop(&stack, &value);
+	TEST_ASSERT_EQUAL(4, value);
+}
+
+void test_function_should_queue_from_stack(void)
+{
+	llnode *queue = NULL;
+	int value;
+
+	enqueueStack(&queue, 1);
+	enqueueStack(&queue, 2);
+	enqueueStack(&queue, 3);
+	enqueueStack(&queue, 4);
+
+	dequeueStack(&queue, &value);
+	TEST_ASSERT_EQUAL(1, value);
+	dequeueStack(&queue, &value);
+	TEST_ASSERT_EQUAL(2, value);
+	dequeueStack(&queue, &value);
+	TEST_ASSERT_EQUAL(3, value);
+	dequeueStack(&queue, &value);
 	TEST_ASSERT_EQUAL(4, value);
 }

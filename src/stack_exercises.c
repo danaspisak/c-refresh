@@ -71,3 +71,35 @@ void reverseStack(llnode **head)
 		insertAtBottom(head, value);
 	}
 }
+
+void enqueueStack(llnode **head, int value)
+{
+	push(head, value);
+}
+
+int removeBottomOfStack(llnode **head)
+{
+	int value, return_value;
+
+	if (!isEmpty(*head))
+	{
+		pop(head, &value);
+		if (isEmpty(*head))
+		{
+			return_value = value;
+		}
+		else
+		{
+			return_value = removeBottomOfStack(head);
+			push(head, value);
+		}
+	}
+
+	return return_value;
+}
+
+void dequeueStack(llnode **head, int *value)
+{
+	*value = removeBottomOfStack(head);
+}
+
