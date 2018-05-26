@@ -7,7 +7,7 @@
 #include "unity.h"
 #include "stack.h"
 #include "linked-list.h"
-#include "stack_exercises.h"
+#include "stack-exercises.h"
 
 void setUp(void) {
     // set stuff up here
