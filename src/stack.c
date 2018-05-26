@@ -33,5 +33,5 @@ STATUS peek(llnode *list, int *return_item)
 
 int isEmpty(llnode *list)
 {
-	return (list != NULL);
+	return (list == NULL);
 }

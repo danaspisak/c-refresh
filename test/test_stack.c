@@ -85,21 +85,21 @@ void test_function_isEmpty(void)
 	STATUS status;
 
 	value = isEmpty(head);
-	TEST_ASSERT_NOT_EQUAL(1,value);
+	TEST_ASSERT_EQUAL(1,value);
 
 	push(&head, 5);
 	push(&head, 4);
 
 	value = isEmpty(head);
-	TEST_ASSERT_NOT_EQUAL(0,value);
-
-    status = pop(&head,&value);
-	value = isEmpty(head);
-	TEST_ASSERT_NOT_EQUAL(0,value);
+	TEST_ASSERT_NOT_EQUAL(1,value);
 
     status = pop(&head,&value);
 	value = isEmpty(head);
 	TEST_ASSERT_NOT_EQUAL(1,value);
+
+    status = pop(&head,&value);
+	value = isEmpty(head);
+	TEST_ASSERT_NOT_EQUAL(0,value);
 
 	deleteList(&head);
 

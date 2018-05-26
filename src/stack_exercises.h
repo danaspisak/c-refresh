@@ -4,5 +4,6 @@
 #include "linked-list.h"
 
 STATUS checkBalanced(char *);
+void reverseStack(llnode **head);
 
 #endif

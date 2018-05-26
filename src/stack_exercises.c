@@ -36,3 +36,38 @@ STATUS checkBalanced(char *input)
 	deleteList(&stack);
 	return status;
 }
+
+void insertAtBottom(llnode **head, int item)
+{
+	int value;
+
+	/* Move everything off the stack until it's empty
+	 * and then place the item we want at the bottom and replace
+	 * the item from the function stack.
+	 */
+	if (isEmpty(*head))
+	{
+		push(head, item);
+	}
+	else
+	{
+		pop(head, &value);
+		insertAtBottom(head, item);
+		push(head, value);
+	}
+}
+
+void reverseStack(llnode **head)
+{
+	int value;
+
+	/* Empty the stack with each item on the function stack, then
+	 * reinsert by putting the item as the bottom of the stack.
+	 */
+	if (!isEmpty(*head))
+	{
+		pop(head, &value);
+		reverseStack(head);
+		insertAtBottom(head, value);
+	}
+}

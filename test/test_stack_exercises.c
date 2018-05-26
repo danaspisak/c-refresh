@@ -30,3 +30,24 @@ void test_function_should_check_balance (void)
 	TEST_ASSERT_EQUAL(LL_ERROR, status);
 
 }
+
+void test_function_should_reverse_stack(void)
+{
+	llnode *stack;
+	int value;
+
+	push(&stack, 1);
+	push(&stack, 2);
+	push(&stack, 3);
+	push(&stack, 4);
+
+	reverseStack(&stack);
+	pop(&stack, &value);
+	TEST_ASSERT_EQUAL(1, value);
+	pop(&stack, &value);
+	TEST_ASSERT_EQUAL(2, value);
+	pop(&stack, &value);
+	TEST_ASSERT_EQUAL(3, value);
+	pop(&stack, &value);
+	TEST_ASSERT_EQUAL(4, value);
+}
