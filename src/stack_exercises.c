@@ -81,6 +81,9 @@ int removeBottomOfStack(llnode **head)
 {
 	int value, return_value;
 
+	/* Recurively go until the stack is empty. Use the funtion return value
+	 * to pass back the last item. Place the other items back on the stack.
+	 */
 	if (!isEmpty(*head))
 	{
 		pop(head, &value);
