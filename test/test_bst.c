@@ -39,17 +39,17 @@ void test_function_should_add(void)
 	TEST_ASSERT_NOT_EQUAL(node, root);
 	TEST_ASSERT_EQUAL(root->right, node);
 
-	status = bstSearch(&root, 'k');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 'k');
+	TEST_ASSERT_EQUAL('k', node->element.key);
 
-	status = bstSearch(&root, 'j');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 'j');
+	TEST_ASSERT_EQUAL('j', node->element.key);
 
-	status = bstSearch(&root, 'a');
-	TEST_ASSERT_EQUAL(0, status);
+	node = bstSearch(&root, 'a');
+	TEST_ASSERT_EQUAL(NULL, node);
 
-	status = bstSearch(&root, 'l');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 'l');
+	TEST_ASSERT_EQUAL('l', node->element.key);
 
 	node = bstCreateNode('o', 6);
 	bstAdd(&root, node);
@@ -58,12 +58,12 @@ void test_function_should_add(void)
 	node = bstCreateNode('s', 6);
 	bstAdd(&root, node);
 
-	status = bstSearch(&root, 'o');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 'o');
+	TEST_ASSERT_EQUAL('o', node->element.key);
 
-	status = bstSearch(&root, 's');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 's');
+	TEST_ASSERT_EQUAL('s', node->element.key);
 
-	status = bstSearch(&root, 't');
-	TEST_ASSERT_EQUAL(1, status);
+	node = bstSearch(&root, 't');
+	TEST_ASSERT_EQUAL('t', node->element.key);
 }
