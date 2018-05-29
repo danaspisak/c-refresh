@@ -36,3 +36,25 @@ void bstAdd(bstNode **root, bstNode *newNode)
 		bstAdd(&(*root)->right, newNode);
 	}
 }
+
+int bstSearch(bstNode **root, char key)
+{
+	if (*root == NULL)
+	{
+		return 0;
+	}
+	else if ((*root)->element.key == key)
+	{
+		return 1;
+	}
+	/* Insert to the left */
+	else if (key <= (*root)->element.key)
+	{
+		return bstSearch(&(*root)->left, key);
+	}
+	/* Insert to the right */
+	else
+	{
+		return bstSearch(&(*root)->right, key);
+	}
+}
