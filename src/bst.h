@@ -15,5 +15,6 @@ typedef struct bstNode {
 bstNode *bstCreateNode(char key, int value);
 void bstAdd(bstNode **root, bstNode *newNode);
 bstNode *bstSearch(bstNode **root, char key);
+bstNode *bstDelete(bstNode *root, char key);
 
 #endif

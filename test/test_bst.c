@@ -66,4 +66,10 @@ void test_function_should_add(void)
 
 	node = bstSearch(&root, 't');
 	TEST_ASSERT_EQUAL('t', node->element.key);
+
+
+	bstDelete2(root, 't');
+	bstDelete2(root, 'o');
+	bstDelete2(root, 'j');
+
 }

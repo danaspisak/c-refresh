@@ -58,3 +58,71 @@ bstNode *bstSearch(bstNode **root, char key)
 		return bstSearch(&(*root)->right, key);
 	}
 }
+
+bstNode *bstFindMin(bstNode *root)
+{
+	bstNode *tmp = root;
+
+	while (tmp->left != NULL)
+	{
+		tmp = tmp->left;
+	}
+
+	return tmp;
+}
+
+
+bstNode *bstDelete(bstNode *root, char key)
+{
+	if (root != NULL)
+	{
+		/* Go left */
+		if (key < root->element.key)
+		{
+			/* Update the parent if it was modified */
+			root->left = bstDelete(root->left, key);
+		}
+		/* Go right */
+		else if (key > root->element.key)
+		{
+			/* Update the parent if it was modified */
+			root->right = bstDelete2(root->right, key);
+		}
+		/* We have a match */
+		else
+		{
+			/* Is a leaf */
+			if ((root->left == NULL) && (root->right == NULL))
+			{
+				bstDeleteNode(root);
+				root = NULL;
+			}
+			/* Has 1 child to the right, set root to get returned */
+			else if (root->left == NULL)
+			{
+				bstNode *tmp = root;
+				root = root->right;
+				bstDeleteNode(tmp);
+			}
+			/* Has 1 child to the left, set root to get returned */
+			else if (root->right == NULL)
+			{
+				bstNode *tmp = root;
+				root = root->left;
+				bstDeleteNode(tmp);
+			}
+			// Has 2 children
+			else
+			{
+				bstNode *tmp = bstFindMin(root->right);
+				/* Copy the data over and delete the duplicate */
+				root->element.key = tmp->element.key;
+				root->element.value = tmp->element.value;
+				root->right = bstDelete2(root->right, tmp->element.key);
+			}
+		}
+	}
+
+	return root;
+}
+
