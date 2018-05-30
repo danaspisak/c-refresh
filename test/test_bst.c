@@ -68,8 +68,8 @@ void test_function_should_add(void)
 	TEST_ASSERT_EQUAL('t', node->element.key);
 
 
-	bstDelete2(root, 't');
-	bstDelete2(root, 'o');
-	bstDelete2(root, 'j');
+	bstDelete(root, 't');
+	bstDelete(root, 'o');
+	bstDelete(root, 'j');
 
 }

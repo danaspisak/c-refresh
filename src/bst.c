@@ -86,7 +86,7 @@ bstNode *bstDelete(bstNode *root, char key)
 		else if (key > root->element.key)
 		{
 			/* Update the parent if it was modified */
-			root->right = bstDelete2(root->right, key);
+			root->right = bstDelete(root->right, key);
 		}
 		/* We have a match */
 		else
@@ -118,7 +118,7 @@ bstNode *bstDelete(bstNode *root, char key)
 				/* Copy the data over and delete the duplicate */
 				root->element.key = tmp->element.key;
 				root->element.value = tmp->element.value;
-				root->right = bstDelete2(root->right, tmp->element.key);
+				root->right = bstDelete(root->right, tmp->element.key);
 			}
 		}
 	}
