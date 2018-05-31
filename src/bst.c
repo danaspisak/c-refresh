@@ -126,3 +126,14 @@ bstNode *bstDelete(bstNode *root, char key)
 	return root;
 }
 
+void bstDeleteTree(bstNode *root)
+{
+	if (root != NULL)
+	{
+		if (root->left != NULL)
+			bstDeleteTree(root->left);
+		if (root->right != NULL)
+			bstDeleteTree(root->right);
+		bstDeleteNode(root);
+	}
+}
